@@ -1,45 +1,39 @@
 version: '3.8'
-
 services:
-  server:
-    build:
-      context: ./server
-      dockerfile: Dockerfile
-    ports:
-      - "3000:3000"
-    environment:
-      - DATABASE_URL=postgresql://user:password@db:5432/free_concert_tickets?schema=public
-    depends_on:
-      - db
-    volumes:
-      - ./server:/usr/src/app
-      - /usr/src/app/node_modules
-    command: sh -c "npx prisma migrate dev && npm run start:dev"
-
-  client:
+  nextjs-app:
     build:
       context: ./client
       dockerfile: Dockerfile
     ports:
-      - "3001:3000"
+      - "${NEXT_PORT}:3000"
     environment:
-      - NEXT_PUBLIC_API_URL=http://server:3000
+      - NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL}
     depends_on:
-      - server
-    volumes:
-      - ./client:/usr/src/app
-      - /usr/src/app/node_modules
+      - nestjs-app
 
-  db:
+  nestjs-app:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    ports:
+      - "${NEST_PORT}:3001"
+    depends_on:
+      - postgres
+    environment:
+      DATABASE_URL: postgresql://${DB_USER}:${DB_PASSWORD}@postgres:5432/${DB_NAME}?schema=public
+      JWT_SECRET: ${JWT_SECRET}
+
+  postgres:
     image: postgres:13
     environment:
-      - POSTGRES_USER=user
-      - POSTGRES_PASSWORD=password
-      - POSTGRES_DB=free_concert_tickets
-    ports:
-      - "5432:5432"
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - postgres-data:/var/lib/postgresql/data
+    ports:
+      - "${DB_PORT}:5432"
 
 volumes:
-  postgres_data:
+  postgres-data:
+

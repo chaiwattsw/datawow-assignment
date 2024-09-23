@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useState } from "react";
 import {
   IconClose,
@@ -40,7 +42,7 @@ const Sidebar: React.FC = () => {
       >
         <div className="p-4 flex justify-between items-center">
           <h1 className="text-2xl text-black font-bold">
-            {session?.user.role}
+            {session?.user?.role}
           </h1>
           <button className="md:hidden" onClick={toggleSidebar}>
             <IconClose />
@@ -56,7 +58,7 @@ const Sidebar: React.FC = () => {
               Home
             </a>
             <a
-              href="#"
+              href="/history"
               className="inline-flex gap-2 w-full py-2 px-4 text-gray-600 hover:bg-gray-100"
             >
               <IconInbox />
