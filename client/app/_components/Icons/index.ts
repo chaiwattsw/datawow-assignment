@@ -1,0 +1,10 @@
+export { default as IconAward } from "./Award";
+export { default as IconTrash } from "./Trash";
+export { default as IconUser } from "./User";
+export { default as IconXCircle } from "./XCircle";
+export { default as IconHome } from "./Home";
+export { default as IconClose } from "./Close";
+export { default as IconInbox } from "./Inbox";
+export { default as IconLogout } from "./Logout";
+export { default as IconRefresh } from "./Refresh";
+export { default as IconCheckCircle } from "./CheckCircle";
