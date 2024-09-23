@@ -1,0 +1,23 @@
+version: '3.8'
+services:
+  nestjs-app:
+    build: .
+    ports:
+      - "3000:3000"
+    depends_on:
+      - postgres
+    environment:
+      DATABASE_URL: postgresql://user:password@postgres:5432/mydb?schema=public
+      JWT_SECRET: "5958e32a926227d44b3c1a4c4a4ff8431d1c1ea2769ae26d5682ba27e94832c1bdeb51befe1a6aae22b981d0c358a7ef8494ff01bd4ebd6d5a5811cdfb224cb2"
+
+  postgres:
+    image: postgres:13
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: mydb
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+
+volumes:
+  postgres-data:
