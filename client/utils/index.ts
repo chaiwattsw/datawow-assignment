@@ -14,7 +14,6 @@ httpClient.interceptors.request.use(async (config) => {
   if (isServer) {
     const { cookies } = await import("next/headers"),
       token = cookies().get("next-auth.session-token")?.value;
-    console.log("🚀 ~ httpClient.interceptors.request.use ~ token:", token);
 
     if (token) {
       config.headers["Authorization"] = `Bearer ${token}`;

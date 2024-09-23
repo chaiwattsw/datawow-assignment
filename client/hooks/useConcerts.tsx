@@ -12,7 +12,7 @@ interface Concert {
 
 async function fetchAllConcerts(): Promise<Concert[]> {
   const { data } = await httpClient.get("/concerts");
-  console.log("🚀 ~ fetchAllConcerts ~ data:", data);
+
   return data;
 }
 

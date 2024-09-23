@@ -8,13 +8,11 @@ import {
   IconXCircle,
 } from "./_components/Icons";
 import CreateConcertForm from "./_components/CreateConcertForm";
-import Sidebar from "./_components/Sidebar";
 import { useConcerts } from "@/hooks/useConcerts";
 
 const AdminPage = () => {
   const [activeTab, setActiveTab] = useState("overview");
   const { data: concerts, isLoading } = useConcerts();
-  console.log("🚀 ~ AdminPage ~ concerts:", concerts);
 
   if (isLoading) return <div>Loading...</div>;
 
