@@ -2,7 +2,6 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 
 import { CreateConcertDto } from './dto/create-concert.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
-import { Concert } from './entities/concert.entity';
 
 @Injectable()
 export class ConcertsService {
